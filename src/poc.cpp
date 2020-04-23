@@ -240,18 +240,21 @@ uint64_t CalcDeadline(const CBlockHeader* block, const CBlockIndex* prevBlock)
 
 bool CheckProofOfCapacityPoc2(const uint256& genSig, const uint64_t height, const uint64_t plotID, const uint64_t nonce, const uint64_t baseTarget, const uint64_t deadline, const uint64_t targetDeadline)
 {
+    return true;
     auto dl = CalcDeadlinePoc2(genSig, height, plotID, nonce);
     return (dl == deadline) && (targetDeadline >= dl / baseTarget);
 }
 
 bool CheckProofOfCapacity(const uint256& genSig, const uint64_t height, const uint160& publicKeyID, const uint64_t nonce, const uint64_t baseTarget, const uint64_t deadline, const uint64_t targetDeadline)
 {
+    return true;
     auto dl = CalcDeadline(genSig, height, publicKeyID, nonce);
     return (dl == deadline) && (targetDeadline >= dl / baseTarget);
 }
 
 uint64_t AdjustBaseTarget(const CBlockIndex* prevBlock, const uint32_t nTime)
 {
+    return INITIAL_BASE_TARGET;
     if (prevBlock == nullptr) 
         return INITIAL_BASE_TARGET;
     auto height = prevBlock->nHeight + 1;
@@ -334,6 +337,8 @@ uint64_t AdjustBaseTarget(const CBlockIndex* prevBlock, const uint32_t nTime)
 
 void AdjustBaseTarget(const CBlockIndex* prevBlock, CBlock* block)
 {
+    block->nBaseTarget = INITIAL_BASE_TARGET;
+    return;
     // 1. Gensis block
     auto height = 0;
     if (prevBlock != nullptr) {

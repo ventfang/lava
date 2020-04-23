@@ -131,11 +131,6 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("seed1.lavatech.org");
-        vSeeds.emplace_back("seed2.lavatech.org");
-        vSeeds.emplace_back("seed1.lavaspv.org");
-        vSeeds.emplace_back("seed2.lavaspv.org");
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
